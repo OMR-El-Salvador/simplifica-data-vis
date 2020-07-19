@@ -18,7 +18,7 @@
       <hr />
       <div class="row justify-content-center">
         <div class="col-6 text-center">
-          <h1>Costo Económico Social</h1>
+          <h1>Costo Económico Social (CES)</h1>
           <h2>$406.9 millones al año</h2>
           <div id="chart"></div>
         </div>
@@ -37,36 +37,41 @@
     <script type="text/javascript">
       var chart = c3.generate({
           data: {
-              // iris data from R
               columns: [
-                  ['data1', 30],
-                  ['data2', 120],
+                ['CES Empresarial', 276.9],
+                ['CES Ciudadano', 130],
               ],
               type : 'pie',
-              onclick: function (d, i) { console.log("onclick", d, i); },
-              onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-              onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+              onclick: function (d, i) {
+                console.log(d);
+                if (d.id === 'CES Empresarial') {
+                  chart.load({
+                    columns: [
+                      ['MH', 65.4], ['MOP', 14.7], ['MAG', 7.6], ['MINSAL', 4.5], ['MINED', 1.9],
+                      ['MTPS', 1.6], ['MDN', 1.1], ['MGDT', 1], ['MC', 0.8], ['MARN', 0.6],
+                      ['MINEC', 0.5], ['MJSP', 0.3], ['MITUR', 0]
+                    ]
+                  });
+                } else if (d.id === 'CES Ciudadano') {
+                  chart.load({
+                    columns: [
+                      ['MOP', 25.5], ['MRREE', 21.8], ['MINED', 18], ['MJSP', 15.7], ['MH', 10.8],
+                      ['MINEC', 5.2], ['MDN', 1.7], ['MGDT', 0.9], ['MAG', 0.2], ['MTPS', 0.2],
+                      ['MINSAL', 0], ['MC', 0], ['MARN', 0], ['MITUR', 0]
+                    ]
+                  });
+                };
+
+                chart.unload({
+                    ids: 'CES Ciudadano'
+                });
+                chart.unload({
+                    ids: 'CES Empresarial'
+                });
+              },
           }
       });
 
-      setTimeout(function () {
-          chart.load({
-              columns: [
-                  ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2],
-                  ["versicolor", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
-                  ["virginica", 2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8],
-              ]
-          });
-      }, 1500);
-
-      setTimeout(function () {
-          chart.unload({
-              ids: 'data1'
-          });
-          chart.unload({
-              ids: 'data2'
-          });
-      }, 2500);
     </script>
   </body>
 </html>
