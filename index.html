@@ -21,6 +21,8 @@
           <h1>Costo Económico Social (CES)</h1>
           <h2>$406.9 millones al año</h2>
           <div id="chart"></div>
+          <hr />
+          <button id="btn-reload" type="button" class="btn btn-info">Reiniciar gráfico</button>
         </div>
       </div>
       <hr />
@@ -35,43 +37,55 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-      var chart = c3.generate({
-          data: {
-              columns: [
-                ['CES Empresarial', 276.9],
-                ['CES Ciudadano', 130],
-              ],
-              type : 'pie',
-              onclick: function (d, i) {
-                console.log(d);
-                if (d.id === 'CES Empresarial') {
-                  chart.load({
-                    columns: [
-                      ['MH', 65.4], ['MOP', 14.7], ['MAG', 7.6], ['MINSAL', 4.5], ['MINED', 1.9],
-                      ['MTPS', 1.6], ['MDN', 1.1], ['MGDT', 1], ['MC', 0.8], ['MARN', 0.6],
-                      ['MINEC', 0.5], ['MJSP', 0.3], ['MITUR', 0]
-                    ]
-                  });
-                } else if (d.id === 'CES Ciudadano') {
-                  chart.load({
-                    columns: [
-                      ['MOP', 25.5], ['MRREE', 21.8], ['MINED', 18], ['MJSP', 15.7], ['MH', 10.8],
-                      ['MINEC', 5.2], ['MDN', 1.7], ['MGDT', 0.9], ['MAG', 0.2], ['MTPS', 0.2],
-                      ['MINSAL', 0], ['MC', 0], ['MARN', 0], ['MITUR', 0]
-                    ]
-                  });
-                };
+      var init_graphs = function () {
+        var chart = c3.generate({
+            data: {
+                columns: [
+                  ['CES Empresarial', 276.9],
+                  ['CES Ciudadano', 130],
+                ],
+                type : 'pie',
+                onclick: function (d, i) {
+                  console.log(d);
+                  if (d.id === 'CES Empresarial') {
+                    chart.load({
+                      columns: [
+                        ['MH', 65.4], ['MOP', 14.7], ['MAG', 7.6], ['MINSAL', 4.5], ['MINED', 1.9],
+                        ['MTPS', 1.6], ['MDN', 1.1], ['MGDT', 1], ['MC', 0.8], ['MARN', 0.6],
+                        ['MINEC', 0.5], ['MJSP', 0.3], ['MITUR', 0]
+                      ]
+                    });
+                  } else if (d.id === 'CES Ciudadano') {
+                    chart.load({
+                      columns: [
+                        ['MOP', 25.5], ['MRREE', 21.8], ['MINED', 18], ['MJSP', 15.7], ['MH', 10.8],
+                        ['MINEC', 5.2], ['MDN', 1.7], ['MGDT', 0.9], ['MAG', 0.2], ['MTPS', 0.2],
+                        ['MINSAL', 0], ['MC', 0], ['MARN', 0], ['MITUR', 0]
+                      ]
+                    });
+                  };
 
-                chart.unload({
-                    ids: 'CES Ciudadano'
-                });
-                chart.unload({
-                    ids: 'CES Empresarial'
-                });
-              },
-          }
+                  chart.unload({
+                      ids: 'CES Ciudadano'
+                  });
+                  chart.unload({
+                      ids: 'CES Empresarial'
+                  });
+                },
+            }
+        });
+      };
+      $(document).ready(function() {
+        init_graphs();
+
+        $('#btn-reload').click(function () {
+          $(this).attr('disabled', true);
+          setTimeout(function () {
+            init_graphs();
+            $('#btn-reload').removeAttr('disabled');
+          }, 500);
+        })
       });
-
     </script>
   </body>
 </html>
