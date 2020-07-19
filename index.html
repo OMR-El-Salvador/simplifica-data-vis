@@ -11,21 +11,22 @@
     <!-- Load c3.css -->
     <link href="c3/c3.css" rel="stylesheet">
 
-    <title>Hello, world!</title>
+    <title>Resultados del proyecto Simplifica</title>
   </head>
-  <body>
+  <body style="background-color: rgb(49, 57, 69)">
     <div class="container">
-      <hr />
-      <div class="row justify-content-center">
+      <div class="row justify-content-center bg-white mt-4">
         <div class="col-12 text-center">
-          <h1>Costo Económico Social (CES)</h1>
-          <h2>$406.9 millones al año</h2>
-          <div id="chart"></div>
-          <hr />
+          <h1 class="mt-4">Resultados del proyecto Simplifica</h1>
+          <h2>Costo Económico Social (CES)</h2>
+          <div class="shadow-lg rounded m-4">
+            <h3 id="graph-title" class="pt-4">CES: USD $406.9 millones al año</h3>
+            <div id="chart"></div>
+          </div>
           <button id="btn-reload" type="button" class="btn btn-info">Reiniciar gráfico</button>
+          <hr />
         </div>
       </div>
-      <hr />
     </div>
     <!-- Load d3.js and c3.js -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -61,6 +62,7 @@
                         ['MINEC', 0.5], ['MJSP', 0.3], ['MITUR', 0]
                       ]
                     });
+                    $("#graph-title").text("CES Empresarial: USD $276.9 millones al año");
                   } else if (d.id === 'CES Ciudadano') {
                     chart.load({
                       columns: [
@@ -69,6 +71,7 @@
                         ['MINSAL', 0], ['MC', 0], ['MARN', 0], ['MITUR', 0]
                       ]
                     });
+                    $("#graph-title").text("CES Ciudadano: USD $130 millones al año");
                   };
 
                   chart.unload({
@@ -87,6 +90,7 @@
         $('#btn-reload').click(function () {
           $(this).attr('disabled', true);
           setTimeout(function () {
+            $("#graph-title").text("CES: USD $406.9 millones al año");
             init_graphs();
             $('#btn-reload').removeAttr('disabled');
           }, 500);
