@@ -18,12 +18,17 @@
       <div class="row justify-content-center bg-white mt-4">
         <div class="col-12 text-center">
           <h1 class="mt-4">Resultados del proyecto Simplifica</h1>
-          <h2>Costo Económico Social (CES)</h2>
+          <h2 class="mt-4">Costo Económico Social (CES)</h2>
           <div class="shadow-lg rounded m-4">
             <h3 id="graph-title" class="pt-4">CES: USD $406.9 millones al año</h3>
             <div id="chart"></div>
           </div>
-          <button id="btn-reload" type="button" class="btn btn-info">Reiniciar gráfico</button>
+          <hr />
+          <h2 class="mt-5">Número de trámites por ministerio</h2>
+          <div class="shadow-lg rounded m-4">
+            <div id="chart2"></div>
+          </div>
+          <button id="btn-reload" type="button" class="btn btn-info">Reiniciar gráficos</button>
           <hr />
         </div>
       </div>
@@ -82,6 +87,32 @@
                   });
                 },
             }
+        });
+        var chart2 = c3.generate({
+          bindto: '#chart2',
+          data: {
+            columns: [
+              ['Ciudadanos', 36, 113, 75, 0, 205, 44, 28, 87, 30, 28, 66, 12, 0, 1],
+              ['Empresariales', 312, 209, 269, 29, 150, 122, 132, 27, 62, 55, 0, 30, 41, 14],
+              ['Total', 348, 322, 288, 269, 234, 166, 160, 114, 92, 83, 66, 42, 41, 15]
+            ],
+            type: 'bar'
+          },
+          bar: {
+            width: {
+              ratio: 0.5
+            }
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: [
+                'MAG', 'MOP', 'MH', 'MINSAL', 'MJSP', 'MDN', 'MINEC', 'MINED', 'MGDT',
+                'MTPS', 'MRREE', 'MARN', 'MITUR', 'MC'
+              ]
+            },
+            rotated: true
+          }
         });
       };
       $(document).ready(function() {
