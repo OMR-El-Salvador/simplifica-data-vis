@@ -17,7 +17,7 @@
     <div class="container">
       <hr />
       <div class="row justify-content-center">
-        <div class="col-6 text-center">
+        <div class="col-12 text-center">
           <h1>Costo Económico Social (CES)</h1>
           <h2>$406.9 millones al año</h2>
           <div id="chart"></div>
@@ -39,6 +39,12 @@
     <script type="text/javascript">
       var init_graphs = function () {
         var chart = c3.generate({
+            size: {
+              height: 500
+            },
+            transition: {
+              duration: 400
+            },
             data: {
                 columns: [
                   ['CES Empresarial', 276.9],
@@ -66,10 +72,10 @@
                   };
 
                   chart.unload({
-                      ids: 'CES Ciudadano'
+                    ids: 'CES Ciudadano'
                   });
                   chart.unload({
-                      ids: 'CES Empresarial'
+                    ids: 'CES Empresarial'
                   });
                 },
             }
@@ -84,7 +90,7 @@
             init_graphs();
             $('#btn-reload').removeAttr('disabled');
           }, 500);
-        })
+        });
       });
     </script>
   </body>
